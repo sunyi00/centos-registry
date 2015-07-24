@@ -8,5 +8,7 @@ ENV GOPATH $DISTRIBUTION_DIR/Godeps/_workspace:$GOPATH
 ENV DOCKER_BUILDTAGS include_rados
 
 WORKDIR $DISTRIBUTION_DIR
-COPY . $DISTRIBUTION_DIR
+RUN mkdir -p $DISTRIBUTION_DIR \
+    && cd $DISTRIBUTION_DIR \
+    && git clone https://github.com/docker/distribution/tree/v2.0.1 .
 RUN make PREFIX=/go clean binaries
